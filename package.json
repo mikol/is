@@ -1,0 +1,23 @@
+{
+  "name": "is",
+  "version": "0.0.1",
+  "description": "Utility methods for determining a value’s type.",
+  "main": "is.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mikol/is.git"
+  },
+  "author": {
+    "name": "Mikol Graves",
+    "email": "mikol@thinbox.org",
+    "url": "https://mikol.github.io/"
+  },
+  "license": "CC-BY-SA-4.0",
+  "bugs": {
+    "url": "https://github.com/mikol/is/issues"
+  },
+  "homepage": "https://github.com/mikol/is#readme"
+}
