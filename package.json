@@ -19,5 +19,8 @@
   "bugs": {
     "url": "https://github.com/mikol/is/issues"
   },
-  "homepage": "https://github.com/mikol/is#readme"
+  "homepage": "https://github.com/mikol/is#readme",
+  "dependencies": {
+    "instance": "git+https://github.com/mikol/instance.git"
+  }
 }
