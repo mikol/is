@@ -2,7 +2,7 @@
 
 require('criteria'); /* globals scope, test */
 
-const is = require('is');
+const is = require('../is');
 
 scope('`is.*()` correctly identify values.',
 function () {
@@ -40,19 +40,34 @@ function () {
     must.true(() => is.date(new Date()));
   });
 
+  test('`false` is a usable value.',
+  function (must) {
+    must.true(() => is.def(false));
+  });
+
   test('`Error()` is an Error.',
   function (must) {
     must.true(() => is.error(Error()));
   });
 
-  test('`false` is a usable value.',
-  function (must) {
-    must.true(() => is.extent(false));
-  });
-
   test('`function () {}` is a function.',
   function (must) {
     must.true(() => is.function(function () {}));
+  });
+
+  test('`null` is not a usable value.',
+  function (must) {
+    must.true(() => is.nil(null));
+  });
+
+  test('`undefined` is not a usable value.',
+  function (must) {
+    must.true(() => is.nil(void 0));
+  });
+
+  test('`false` is not an unusable value.',
+  function (must) {
+    must.true(() => !is.nil(false));
   });
 
   test('`null` is null.',

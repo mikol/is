@@ -60,6 +60,22 @@ function factory(instance) {
     },
 
     /**
+     * Determines if `v` has a meaningful, introspectable value (that is, not
+     * the non-value `null` and not the unitialized value `undefined`); the
+     * opposite of `is.nil()`.
+     *
+     * @param {*} v - The value to test.
+     *
+     * @return {!boolean} `true` if `v` has a meaningful value;
+     *     `false` otherwise.
+     *
+     * @see is.{@link module:is~nil|nil}()
+     */
+    def: function isDef(v) {
+      return v != N;
+    },
+
+    /**
      * Determines if `v` is an error.
      *
      * @param {*} v - The value to test.
@@ -69,22 +85,6 @@ function factory(instance) {
     error: function isError(v) {
       return v != N &&
           stringify(v) === '[object Error]';
-    },
-
-    /**
-     * Determines if `v` has a meaningful, introspectable value (that is, not
-     * the non-value `null` and not the unitialized value `undefined`).
-     *
-     * @param {*} v - The value to test.
-     *
-     * @return {!boolean} `true` if `v` has a meaningful value;
-     *     `false` otherwise.
-     *
-     * @see is.{@link module:is~ext|ext}()
-     * @see is.{@link module:is~nix|nix}()
-     */
-    extent: function isExtent(v) {
-      return v != N;
     },
 
     /**
@@ -101,16 +101,16 @@ function factory(instance) {
 
     /**
      * Determines if `v` is *not* a usable value (that is, the non-value `null`
-     * or the unitialized value `undefined`); the opposite of `is.extent()`.
+     * or the unitialized value `undefined`); the opposite of `is.def()`.
      *
      * @param {*} v - The value to test.
      *
      * @return {!boolean} `true` if `v` is not a usable value;
      *     `false` otherwise.
      *
-     * @see is.{@link module:is~extent|extent}()
+     * @see is.{@link module:is~def|def}()
      */
-    nix: function isNix(v) {
+    nil: function isNil(v) {
       return v == N;
     },
 
