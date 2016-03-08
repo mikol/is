@@ -8,7 +8,7 @@ var id = 'is';
 var dependencies = ['instance'];
 
 function factory(instance) {
-  var stringify = {}.toString.call.bind({}.toString);
+  var classify = {}.toString.call.bind({}.toString);
 
   return instance.create(null, {
     /**
@@ -20,7 +20,7 @@ function factory(instance) {
      */
     array: function isArray(v) {
       return v != null &&
-          stringify(v) === '[object Array]';
+          classify(v) === '[object Array]';
     },
 
     /**
@@ -32,7 +32,7 @@ function factory(instance) {
      */
     boolean: function isBoolean(v) {
       return v != null &&
-          typeof v === 'boolean' || stringify(v) === '[object Boolean]';
+          typeof v === 'boolean' || classify(v) === '[object Boolean]';
     },
 
     /**
@@ -44,7 +44,7 @@ function factory(instance) {
      */
     date: function isDate(v) {
       return v != null &&
-          stringify(v) === '[object Date]';
+          classify(v) === '[object Date]';
     },
 
     /**
@@ -72,7 +72,7 @@ function factory(instance) {
      */
     error: function isError(v) {
       return v != null &&
-          stringify(v) === '[object Error]';
+          classify(v) === '[object Error]';
     },
 
     /**
@@ -122,7 +122,7 @@ function factory(instance) {
      */
     number: function isNumber(v) {
       return v != null &&
-          !isNaN(v) && stringify(v) === '[object Number]';
+          !isNaN(v) && classify(v) === '[object Number]';
     },
 
     /**
@@ -169,7 +169,7 @@ function factory(instance) {
      */
     regexp: function isRegExp(v) {
       return v != null &&
-          stringify(v) === '[object RegExp]';
+          classify(v) === '[object RegExp]';
     },
 
     /**
@@ -181,7 +181,7 @@ function factory(instance) {
      */
     string: function isString(v) {
       return v != null &&
-          typeof v === 'string' || stringify(v) === '[object String]';
+          typeof v === 'string' || classify(v) === '[object String]';
     },
 
     /**
@@ -193,7 +193,7 @@ function factory(instance) {
      */
     symbol: function isSymbol(v) {
       return v != null &&
-          typeof v === 'symbol' || stringify(v) === '[object Symbol]';
+          typeof v === 'symbol' || classify(v) === '[object Symbol]';
     },
 
     /**
