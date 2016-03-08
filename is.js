@@ -10,19 +10,7 @@ var dependencies = ['instance'];
 function factory(instance) {
   var stringify = {}.toString.call.bind({}.toString);
 
-  /**
-   * @const {null}
-   * @private
-   */
-  var N = null;
-
-  /**
-   * @const {undefined}
-   * @private
-   */
-  var U;
-
-  return instance.create(N, {
+  return instance.create(null, {
     /**
      * Determines if `v` is an array.
      *
@@ -31,7 +19,7 @@ function factory(instance) {
      * @return {!boolean} `true` if `v` is an array; `false` otherwise.
      */
     array: function isArray(v) {
-      return v != N &&
+      return v != null &&
           stringify(v) === '[object Array]';
     },
 
@@ -43,7 +31,7 @@ function factory(instance) {
      * @return {!boolean} `true` if `v` is a boolean; `false` otherwise.
      */
     boolean: function isBoolean(v) {
-      return v != N &&
+      return v != null &&
           typeof v === 'boolean' || stringify(v) === '[object Boolean]';
     },
 
@@ -55,7 +43,7 @@ function factory(instance) {
      * @return {!boolean} `true` if `v` is a date; `false` otherwise.
      */
     date: function isDate(v) {
-      return v != N &&
+      return v != null &&
           stringify(v) === '[object Date]';
     },
 
@@ -72,7 +60,7 @@ function factory(instance) {
      * @see is.{@link module:is~nil|nil}()
      */
     def: function isDef(v) {
-      return v != N;
+      return v != null;
     },
 
     /**
@@ -83,7 +71,7 @@ function factory(instance) {
      * @return {!boolean} `true` if `v` is an error; `false` otherwise.
      */
     error: function isError(v) {
-      return v != N &&
+      return v != null &&
           stringify(v) === '[object Error]';
     },
 
@@ -95,7 +83,7 @@ function factory(instance) {
      * @return {!boolean} `true` if `v` is a function; `false` otherwise.
      */
     function: function isFunction(v) {
-      return v != N &&
+      return v != null &&
           typeof v === 'function';
     },
 
@@ -111,7 +99,7 @@ function factory(instance) {
      * @see is.{@link module:is~def|def}()
      */
     nil: function isNil(v) {
-      return v == N;
+      return v == null;
     },
 
     /**
@@ -122,7 +110,7 @@ function factory(instance) {
      * @return {!boolean} `true` if `v` is `null`; `false` otherwise.
      */
     null: function isNull(v) {
-      return v === N;
+      return v === null;
     },
 
     /**
@@ -133,7 +121,7 @@ function factory(instance) {
      * @return {!boolean} `true` if `v` is a number; `false` otherwise.
      */
     number: function isNumber(v) {
-      return v != N &&
+      return v != null &&
           !isNaN(v) && stringify(v) === '[object Number]';
     },
 
@@ -149,7 +137,7 @@ function factory(instance) {
      * @return {!boolean} `true` if `v` is an object; `false` otherwise.
      */
     object: function isObject(v) {
-      if (v != N) {
+      if (v != null) {
         var tov = typeof v;
         return tov === 'object' || tov === 'function';
       }
@@ -167,7 +155,7 @@ function factory(instance) {
      *     Promises/A+ implementation; `false` otherwise.
      */
     promise: function isPromise(v) {
-      return v != N &&
+      return v != null &&
           v.constructor === Promise.resolve().constructor;
     },
 
@@ -180,7 +168,7 @@ function factory(instance) {
      *     otherwise.
      */
     regexp: function isRegExp(v) {
-      return v != N &&
+      return v != null &&
           stringify(v) === '[object RegExp]';
     },
 
@@ -192,7 +180,7 @@ function factory(instance) {
      * @return {!boolean} `true` if `v` is a string; `false` otherwise.
      */
     string: function isString(v) {
-      return v != N &&
+      return v != null &&
           typeof v === 'string' || stringify(v) === '[object String]';
     },
 
@@ -204,7 +192,7 @@ function factory(instance) {
      * @return {!boolean} `true` if `v` is a symbol; `false` otherwise.
      */
     symbol: function isSymbol(v) {
-      return v != N &&
+      return v != null &&
           typeof v === 'symbol' || stringify(v) === '[object Symbol]';
     },
 
@@ -217,7 +205,7 @@ function factory(instance) {
      *     `false` otherwise.
      */
     thenable: function isThenable(v) {
-      return v != N && typeof v.then === 'function';
+      return v != null && typeof v.then === 'function';
     },
 
     /**
@@ -228,7 +216,7 @@ function factory(instance) {
      * @return {!boolean} `true` if `v` is `undefined`; `false` otherwise.
      */
     undefined: function isUndefined(v) {
-      return v === U;
+      return v === undefined;
     },
   });
 
