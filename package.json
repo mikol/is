@@ -21,6 +21,7 @@
   },
   "homepage": "https://github.com/mikol/is#readme",
   "dependencies": {
+    "classify": "git+https://github.com/mikol/classify.git",
     "instance": "git+https://github.com/mikol/instance.git"
   },
   "devDependencies": {

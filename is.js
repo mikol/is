@@ -5,11 +5,9 @@
 'use strict';
 
 var id = 'is';
-var dependencies = ['instance'];
+var dependencies = ['classify', 'instance'];
 
-function factory(instance) {
-  var classify = {}.toString.call.bind({}.toString);
-
+function factory(classify, instance) {
   return instance.create(null, {
     /**
      * Determines if `v` is an array.
@@ -19,8 +17,7 @@ function factory(instance) {
      * @return {!boolean} `true` if `v` is an array; `false` otherwise.
      */
     array: function isArray(v) {
-      return v != null &&
-          classify(v) === '[object Array]';
+      return classify(v) === 'array';
     },
 
     /**
@@ -31,8 +28,7 @@ function factory(instance) {
      * @return {!boolean} `true` if `v` is a boolean; `false` otherwise.
      */
     boolean: function isBoolean(v) {
-      return v != null &&
-          typeof v === 'boolean' || classify(v) === '[object Boolean]';
+      return classify(v) === 'boolean';
     },
 
     /**
@@ -43,8 +39,7 @@ function factory(instance) {
      * @return {!boolean} `true` if `v` is a date; `false` otherwise.
      */
     date: function isDate(v) {
-      return v != null &&
-          classify(v) === '[object Date]';
+      return classify(v) === 'date';
     },
 
     /**
@@ -71,8 +66,7 @@ function factory(instance) {
      * @return {!boolean} `true` if `v` is an error; `false` otherwise.
      */
     error: function isError(v) {
-      return v != null &&
-          classify(v) === '[object Error]';
+      return classify(v) === 'error';
     },
 
     /**
@@ -83,8 +77,7 @@ function factory(instance) {
      * @return {!boolean} `true` if `v` is a function; `false` otherwise.
      */
     function: function isFunction(v) {
-      return v != null &&
-          typeof v === 'function';
+      return classify(v) === 'function';
     },
 
     /**
@@ -121,8 +114,7 @@ function factory(instance) {
      * @return {!boolean} `true` if `v` is a number; `false` otherwise.
      */
     number: function isNumber(v) {
-      return v != null &&
-          !isNaN(v) && classify(v) === '[object Number]';
+      return classify(v) === 'number';
     },
 
     /**
@@ -137,12 +129,8 @@ function factory(instance) {
      * @return {!boolean} `true` if `v` is an object; `false` otherwise.
      */
     object: function isObject(v) {
-      if (v != null) {
-        var tov = typeof v;
-        return tov === 'object' || tov === 'function';
-      }
-
-      return false;
+      var c = classify(v);
+      return c === 'object' || c === 'function';
     },
 
     /**
@@ -155,8 +143,7 @@ function factory(instance) {
      *     Promises/A+ implementation; `false` otherwise.
      */
     promise: function isPromise(v) {
-      return v != null &&
-          v.constructor === Promise.resolve().constructor;
+      return classify(Promise) === 'function' && v instanceof Promise;
     },
 
     /**
@@ -168,8 +155,7 @@ function factory(instance) {
      *     otherwise.
      */
     regexp: function isRegExp(v) {
-      return v != null &&
-          classify(v) === '[object RegExp]';
+      return classify(v) === 'regexp';
     },
 
     /**
@@ -180,8 +166,7 @@ function factory(instance) {
      * @return {!boolean} `true` if `v` is a string; `false` otherwise.
      */
     string: function isString(v) {
-      return v != null &&
-          typeof v === 'string' || classify(v) === '[object String]';
+      return classify(v) === 'string';
     },
 
     /**
@@ -192,8 +177,7 @@ function factory(instance) {
      * @return {!boolean} `true` if `v` is a symbol; `false` otherwise.
      */
     symbol: function isSymbol(v) {
-      return v != null &&
-          typeof v === 'symbol' || classify(v) === '[object Symbol]';
+      return classify(v) === 'symbol';
     },
 
     /**
@@ -205,7 +189,7 @@ function factory(instance) {
      *     `false` otherwise.
      */
     thenable: function isThenable(v) {
-      return v != null && typeof v.then === 'function';
+      return v != null && classify(v.then) === 'function';
     },
 
     /**
@@ -217,10 +201,8 @@ function factory(instance) {
      */
     undefined: function isUndefined(v) {
       return v === undefined;
-    },
+    }
   });
-
-  // TODO: Implement terse aliases?
 }
 
 // -----------------------------------------------------------------------------

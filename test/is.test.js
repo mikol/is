@@ -45,9 +45,14 @@ function () {
     must.true(() => is.def(false));
   });
 
-  test('`Error()` is an Error.',
+  test('`new Error()` is an error.',
   function (must) {
     must.true(() => is.error(Error()));
+  });
+
+  test('`new TypeError()` is an error.',
+  function (must) {
+    must.true(() => is.error(new TypeError()));
   });
 
   test('`function () {}` is a function.',
@@ -112,6 +117,11 @@ function () {
   test('`function () {}` is an object.',
   function (must) {
     must.true(() => is.object(function () {}));
+  });
+
+  test('`null` is not an object.',
+  function (must) {
+    must.true(() => !is.object(null));
   });
 
   test('`true` is not an object.',
@@ -200,12 +210,17 @@ function () {
     function (must) {
       must.true(() => is.thenable(new Promise(function () {})));
     });
-
-    test('`{then: true}` is not a thenable.',
-    function (must) {
-      must.true(() => !is.thenable({then: true}));
-    });
   }
+
+  test('`{then: function () {}}` is a thenable.',
+  function (must) {
+    must.true(() => is.thenable({then: function () {}}));
+  });
+
+  test('`{then: true}` is not a thenable.',
+  function (must) {
+    must.true(() => !is.thenable({then: true}));
+  });
 
   test('`(function () {})()` is undefined.',
   function (must) {
@@ -215,5 +230,10 @@ function () {
   test('`void (0)` is undefined.',
   function (must) {
     must.true(() => is.undefined(void (0)));
+  });
+
+  test('`null` is not undefined.',
+  function (must) {
+    must.true(() => !is.undefined(null));
   });
 });
